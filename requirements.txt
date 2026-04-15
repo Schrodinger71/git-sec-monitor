@@ -1,4 +1,3 @@
-requests
+aiohttp
+disnake
 python-dotenv
-transformers
-torch

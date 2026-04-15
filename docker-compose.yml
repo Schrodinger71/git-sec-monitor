@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  git-sec-monitor:
+    build: .
+    container_name: git-sec-monitor
+    restart: unless-stopped
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+      CHANNEL_ID: ${CHANNEL_ID}
+      MENTION_USER_ID: ${MENTION_USER_ID}
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      GITHUB_REPOSITORIES: ${GITHUB_REPOSITORIES}
+      CHECK_INTERVAL_MINUTES: ${CHECK_INTERVAL_MINUTES:-15}
+      MONITOR_DB_PATH: ${MONITOR_DB_PATH:-data/github_monitor.db}
+      ALERT_ON_FIRST_RUN: ${ALERT_ON_FIRST_RUN:-false}
+    volumes:
+      - ./data:/app/data
