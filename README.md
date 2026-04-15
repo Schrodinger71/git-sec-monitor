@@ -22,7 +22,7 @@ Copy `.env.example` to `.env` and fill in:
 
 Optional:
 
-- `MENTION_USER_ID`
+- `MENTION_USER_ID` leave empty to disable mention pinging
 - `CHECK_INTERVAL_MINUTES`
 - `MONITOR_DB_PATH`
 - `ALERT_ON_FIRST_RUN`

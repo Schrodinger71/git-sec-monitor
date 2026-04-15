@@ -26,12 +26,21 @@ def parse_repositories(raw_value: Optional[str]) -> list[str]:
     return [item.strip() for item in normalized.split(",") if item.strip()]
 
 
+def parse_int(value: Optional[str], default: int = 0) -> int:
+    if value is None:
+        return default
+    normalized = value.strip()
+    if not normalized:
+        return default
+    return int(normalized)
+
+
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
-CHANNEL_ID = int(os.getenv("CHANNEL_ID", "0"))
-MENTION_USER_ID = int(os.getenv("MENTION_USER_ID", "0"))
+CHANNEL_ID = parse_int(os.getenv("CHANNEL_ID"), default=0)
+MENTION_USER_ID = parse_int(os.getenv("MENTION_USER_ID"), default=0)
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 GITHUB_REPOSITORIES = parse_repositories(os.getenv("GITHUB_REPOSITORIES"))
-CHECK_INTERVAL_MINUTES = int(os.getenv("CHECK_INTERVAL_MINUTES", "15"))
+CHECK_INTERVAL_MINUTES = parse_int(os.getenv("CHECK_INTERVAL_MINUTES"), default=15)
 DB_PATH = os.getenv("MONITOR_DB_PATH", "data/github_monitor.db")
 ALERT_ON_FIRST_RUN = parse_bool(os.getenv("ALERT_ON_FIRST_RUN"), default=False)
 
